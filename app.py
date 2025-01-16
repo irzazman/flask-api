@@ -1,11 +1,13 @@
+import os
 from flask import Flask, request, jsonify
 import pickle
 import numpy as np
 
 app = Flask(__name__)
+model = 'C:/Users/irzaz/Downloads/project-folder/model/model.pkl'
 
 # Load the .pkl model
-with open('model.pkl', 'rb') as file:
+with open(model, 'rb') as file:
     model = pickle.load(file)
 
 @app.route('/predict', methods=['POST'])
@@ -20,4 +22,5 @@ def predict():
     return jsonify({'prediction': prediction.tolist()})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 8080))  # Dynamic port for Render
+    app.run(debug=True, port=port, host='0.0.0.0')
