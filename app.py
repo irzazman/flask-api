@@ -22,5 +22,7 @@ def predict():
     return jsonify({'prediction': prediction.tolist()})
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))  # Dynamic port for Render
-    app.run(debug=True, port=port, host='0.0.0.0')
+    # Get the PORT environment variable from Render, defaulting to 10000 if not found
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host='0.0.0.0', port=port)
+
