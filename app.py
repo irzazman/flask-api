@@ -4,10 +4,10 @@ import pickle
 import numpy as np
 
 app = Flask(__name__)
-model = 'C:/Users/irzaz/Downloads/project-folder/model/model.pkl'
+model_path = os.path.join(os.path.dirname(__file__), 'model', 'model.pkl')
 
-# Load the .pkl model
-with open(model, 'rb') as file:
+# Load the model
+with open(model_path, 'rb') as file:
     model = pickle.load(file)
 
 @app.route('/predict', methods=['POST'])
